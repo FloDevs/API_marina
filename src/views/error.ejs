@@ -1,0 +1,14 @@
+<%- include('layouts/header', { title: "Erreur" }) %>
+
+<h1>Une erreur est survenue</h1>
+
+<% if (message) { %>
+<div class="alert alert-danger"><%= message %></div>
+<% } else { %>
+<p>Une erreur inconnue s'est produite. Veuillez réessayer.</p>
+<% } %>
+
+<p><a href="/dashboard">Retour au tableau de bord</a></p>
+<p><a href="/">Retour à l'accueil</a></p>
+
+<%- include('layouts/footer') %>

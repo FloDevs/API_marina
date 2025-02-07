@@ -1,0 +1,17 @@
+<%- include('layouts/header', { title: "Détails de la Réservation" }) %>
+
+<h1>Détails de la Réservation</h1>
+
+<% if (reservation) { %>
+<p>ID : <%= reservation.id %></p>
+<p>Catway ID : <%= reservation.catwayId %></p>
+<p>Utilisateur ID : <%= reservation.userId %></p>
+<p>Date : <%= reservation.date %></p>
+<% } else { %>
+<p>Aucune réservation trouvée.</p>
+<% } %>
+
+<p><a href="/reservations">Retour à la liste des Réservations</a></p>
+<p><a href="/dashboard">Retour au Tableau de bord</a></p>
+
+<%- include('layouts/footer') %>

@@ -1,0 +1,20 @@
+<%- include('layouts/header', { title: "Liste des Réservations" }) %>
+
+<h1>Liste des Réservations</h1>
+
+<% if (reservations && reservations.length > 0) { %>
+<ul>
+  <% reservations.forEach(reservation => { %>
+  <li>
+    <strong>ID de reservation </strong> <%= reservation.id %> |
+    <strong>ID du catway </strong> <%= reservation.catway %> |
+    <strong>Client :</strong> <%= reservation.clientName %> |
+    <strong>Bateau :</strong> <%= reservation.boatName %> |
+    <strong>Arrivée :</strong> <%= reservation.checkIn.toDateString() %> |
+    <strong>Départ :</strong> <%= reservation.checkOut.toDateString() %>
+  </li>
+  <% }); %>
+</ul>
+<% } else { %>
+<p>Aucune réservation trouvée.</p>
+<% } %> <%- include('layouts/footer') %>
