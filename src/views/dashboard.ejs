@@ -1,0 +1,169 @@
+<%- include('layouts/header', { title: "Tableau de bord" }) %>
+
+<h1>Tableau de bord</h1>
+<p>Bienvenue, <%= user ? user.name : 'Utilisateur' %> !</p>(<strong>Votre ID utilisateur :</strong> <%= user ? user._id : 'Inconnu' %>)</p>
+
+
+<% if (message) { %>
+    <div class="alert alert-success">
+        <%= message %>
+    </div>
+<% } %>
+
+<hr>
+<h2>Gestion des Utilisateurs</h2>
+
+<form action="/auth/register" method="POST">
+  <h3>Créer un utilisateur</h3>
+  <label for="newUsername">Nom d'utilisateur :</label>
+  <input type="text" id="newUsername" name="name" required>
+  <br>
+  <label for="newEmail">Email</label>
+  <input type="email" id="newEmail" name="email" required>
+  <br>
+  <br>
+  <label for="newPassword">Mot de passe :</label>
+  <input type="password" id="newPassword" name="password" required>
+  <br>
+  <button type="submit">Créer</button>
+</form>
+
+<form  data-form-update data-entity="users" data-method="PUT" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+  <h3>Modifier un utilisateur</h3>
+  <label for="updateUserId">ID de l'utilisateur :</label>
+  <input type="text" id="updateUserId" data-id name="id" required>
+  <br>
+  <label for="updateUsername">Nouveau nom d'utilisateur :</label>
+  <input type="text" id="updateUsername" name="name" required>
+  <br>
+  <label for="updateEmail">Email</label>
+  <input type="email" id="updateEmail" name="email" required>
+  <br>
+  <br>
+  <label for="updatePassword">Mot de passe :</label>
+  <input type="password" id="updatenewPassword" name="password" required>
+  <br>
+  <button type="submit">Modifier</button>
+</form>
+
+<form data-form-update data-entity="users" data-method="DELETE" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <h3>Supprimer un utilisateur</h3>
+  <label for="deleteUserId">ID de l'utilisateur :</label>
+  <input type="text" id="deleteUserId" data-id name="id" required>
+  <br>
+  <button type="submit">Supprimer</button>
+</form>
+
+<hr>
+<h2>Gestion des Catways</h2>
+
+<form action="/catways" method="POST">
+  <h3>Créer un Catway</h3>
+
+  <label for="catwayNumber">Numéro du Catway :</label>
+  <input type="text" id="catwayNumber" name="catwayNumber" required>
+  <br>
+
+  <label for="catwayState">État du Catway :</label>
+  <input type="text" id="catwayState" name="catwayState">
+  <br>
+
+  <label for="catwayType">Type :</label>
+  <select id="catwayType" name="type" required>
+    <option value="long">Long</option>
+    <option value="short">Court</option>
+  </select>
+  <br>
+  <label for="catwayDisponible">Disponible :</label>
+  <select id="catwayDisponible" name="disponible">
+      <option value="true" selected>Oui</option>
+      <option value="false">Non</option>
+  </select>
+
+  <button type="submit">Créer</button>
+</form>
+
+
+
+<form data-form-update data-entity="catways" data-method="PUT" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+
+  <h3>Modifier la description d'un catway</h3>
+
+  <label for="updateCatwayId">ID du catway :</label>
+  <input type="text" id="updateCatwayId" data-id name="id" required>
+  <br>
+  <label for="updateCatwayState">Nouvelle description :</label>
+  <textarea id="updateCatwayState" name="catwayState" required></textarea>
+  <br>
+  <button type="submit">Modifier</button>
+</form>
+
+<form data-form-update data-entity="catways" data-method="DELETE" method="POST">
+  <h3>Supprimer un catway</h3>
+  <label for="deleteCatwayId">ID du catway :</label>
+  <input type="text" id="deleteCatwayId" data-id name="id" required>
+  <br>
+  <button type="submit">Supprimer</button>
+</form>
+
+
+<form id="catwayDetailForm">
+  <h3>Détails d'un Catway</h3>
+  <label for="catwayId">ID du Catway :</label>
+  <input type="text" id="catwayId" required>
+  <br>
+  <button type="submit">Afficher les détails</button>
+</form>
+
+<hr>
+<h2>Gestion des Réservations</h2>
+
+<form data-form-update data-entity="reservations" data-method="POST">
+  <h3>Créer une Réservation</h3>
+
+  <label for="id">ID du Catway :</label>
+  <input type="text" id="id" data-id required>
+
+  <label for="clientName">Nom du Client :</label>
+  <input type="text" id="clientName" name="clientName" required>
+
+  <label for="boatName">Nom du Bateau :</label>
+  <input type="text" id="boatName" name="boatName" required>
+
+  <label for="checkIn">Date d'Arrivée :</label>
+  <input type="date" id="checkIn" name="checkIn" required>
+
+  <label for="checkOut">Date de Départ :</label>
+  <input type="date" id="checkOut" name="checkOut" required>
+
+  <br>
+  <button type="submit">Réserver</button>
+</form>
+
+
+<form data-form-update data-entity="reservations" data-method="DELETE">
+  <h3>Supprimer une Réservation</h3>
+
+  <label for="reservationIdDelete">ID de la Réservation :</label>
+  <input type="text" id="reservationIdDelete" data-id required>
+
+  <br>
+  <button type="submit">Supprimer</button>
+</form>
+
+
+<form data-form-update data-entity="reservations" data-method="GET">
+  <h3>Voir une Réservation</h3>
+
+  <label for="reservationIdView">ID de la Réservation :</label>
+  <input type="text" id="reservationIdView" data-id required>
+  <input type="hidden" name="_method" value="DELETE">
+  <br>
+  <button type="submit">Afficher la Réservation</button>
+</form>
+
+
+<%- include('layouts/footer') %>

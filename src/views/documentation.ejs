@@ -1,0 +1,77 @@
+<%- include('layouts/header', { title: "Documentation de l'API" }) %>
+
+<h1>Documentation de l'API</h1>
+<p>Voici la documentation de l'API pour l'application Catways.</p>
+
+<section>
+  <h2>Vue d’Ensemble</h2>
+  <p>
+    L'API <strong>Catway</strong> permet la gestion des catways et des
+    réservations pour un port de plaisance.
+  </p>
+  <ul>
+    <li>
+      <strong>Gérer les catways</strong> (ajout, modification, suppression)
+    </li>
+    <li><strong>Gérer les réservations</strong> (création, annulation)</li>
+    <li>
+      <strong>Gérer les utilisateurs</strong> (inscription, connexion, mise à
+      jour)
+    </li>
+  </ul>
+  <h3>Technologies utilisées</h3>
+  <ul>
+    <li><strong>Backend :</strong> Node.js avec Express.js</li>
+    <li><strong>Base de données :</strong> MongoDB avec Mongoose</li>
+    <li><strong>Authentification :</strong> JWT et express-session</li>
+    <li><strong>Tests :</strong> Mocha, Chai, Supertest</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Tutoriel</h2>
+  <h3>Installation & Configuration</h3>
+  <code>
+    git clone https://github.com/ton-repo.git <br />
+    cd ton-projet <br />
+    npm install <br />
+    Authentification : <br />
+    Inscription : POST /auth/register <br />
+    Connexion : POST /auth/login
+  </code>
+
+  <h2>Routes Disponibles</h2>
+  <ul>
+    <li>POST /auth/register - Enregistrer un nouvel utilisateur</li>
+    <li>POST /auth/login - Connexion</li>
+    <li>GET /catways - Liste des catways</li>
+    <li>POST /catways - Créer un catway</li>
+    <li>GET /catways/:id - Détails d'un catway</li>
+    <li>PUT /catways/:id - Modifier un catway</li>
+    <li>DELETE /catways/:id - Supprimer un catway</li>
+    <li>POST /users - Créer un utilisateur</li>
+    <li>PUT /users/:id - Modifier un utilisateur</li>
+    <li>DELETE /users/:id - Supprimer un utilisateur</li>
+    <li>
+      GET /reservations/catways/:id/:reservationId - Détails d'une réservation
+    </li>
+    <li>POST /reservations/:id - Créer une réservation pour un catway</li>
+    <li>DELETE /reservations/:reservationId - Supprimer une réservation</li>
+  </ul>
+
+  <h2>Glossaire</h2>
+  <ul>
+    <li>
+      <strong>Catway :</strong> Emplacement où un bateau peut être amarré.
+    </li>
+    <li>
+      <strong>JWT (JSON Web Token) :</strong> Standard d’authentification
+      utilisé pour sécuriser l’API.
+    </li>
+    <li><strong>CRUD :</strong> Create, Read, Update, Delete.</li>
+  </ul>
+</section>
+
+<p><a href="/">Retour à l'accueil</a></p>
+
+<%- include('layouts/footer') %>

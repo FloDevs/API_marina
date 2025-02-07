@@ -1,18 +1,26 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+const authConfig = require("../config/auth");
 
 const authMiddleware = (req, res, next) => {
-  const token = req.header('Authorization');
+  if (!req.session.user) {
+    req.session.message = "Veuillez vous connecter.";
+    return res.redirect("/");
+  }
+
+  const token = req.session.token;
 
   if (!token) {
-    return res.status(401).json({ message: 'Authentification requise' });
+    return res.redirect("/");
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, authConfig.jwtSecret);
+
     req.user = decoded;
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Token invalide' });
+    req.session.destroy();
+    return res.redirect("/");
   }
 };
 

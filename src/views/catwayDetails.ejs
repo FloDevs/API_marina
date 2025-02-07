@@ -1,0 +1,16 @@
+<%- include('layouts/header', { title: "Détails du Catway" }) %>
+
+<h1>Détails du Catway</h1>
+
+<% if (catway) { %>
+<p>ID : <%= catway.id %></p>
+<p>Nom : <%= catway.name %></p>
+<p>Description : <%= catway.description %></p>
+<% } else { %>
+<p>Aucun catway trouvé.</p>
+<% } %>
+
+<p><a href="/catways">Retour à la liste des Catways</a></p>
+<p><a href="/dashboard">Retour au Tableau de bord</a></p>
+
+<%- include('layouts/footer') %>

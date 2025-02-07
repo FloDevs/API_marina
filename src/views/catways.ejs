@@ -1,0 +1,29 @@
+<%- include('layouts/header', { title: "Liste des Catways" }) %>
+
+<h1>Liste des Catways</h1>
+
+<% if (catways && catways.length > 0) { %>
+<ul>
+  <% catways.forEach(catway => { %>
+  <li>
+    ID : <%= catway.id %> - Numero du catway : <%= catway.catwayNumber %> -
+    Description : <%= catway.catwayState %> - <br />
+    <% if (!catway.disponible) { %>
+    <span style="color: red"
+      >OCCUPÉ - Réservation ID: <%= catway.reservations %></span
+    >
+    <% } else { %>
+    <span style="color: green">LIBRE</span>
+    <% } %>
+
+    <a href="/catways/<%= catway.id %>">Détails</a>
+  </li>
+  <% }); %>
+</ul>
+<% } else { %>
+<p>Aucun catway disponible.</p>
+<% } %>
+
+<p><a href="/dashboard">Retour au Tableau de bord</a></p>
+
+<%- include('layouts/footer') %>

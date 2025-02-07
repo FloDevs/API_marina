@@ -1,61 +1,70 @@
-const Catway = require('../models/Catway');
+const catwayService = require("../services/catwayService");
 
 exports.getAllCatways = async (req, res) => {
   try {
-    const catways = await Catway.find();
-    res.json(catways);
+    const catways = await catwayService.getAllCatways();
+    res.render("catways", { catways, user: req.session.user });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).render("error", { message: error.message });
   }
 };
 
 exports.getCatwayById = async (req, res) => {
   try {
-    const catway = await Catway.findById(req.params.id);
-    if (!catway) return res.status(404).json({ message: 'Catway non trouvé' });
-    res.json(catway);
+    const catway = await catwayService.getCatwayById(req.params.id);
+    if (!catway) {
+      return res.status(404).render("error", { message: "Catway non trouvé" });
+    }
+    const viewType = req.query.view === "details" ? "catwayDetails" : "catways";
+
+    res.render(viewType, { catway, user: req.session?.user || null });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).render("error", { message: error.message });
   }
 };
 
 exports.createCatway = async (req, res) => {
-  const { catwayNumber, type, catwayState } = req.body;
   try {
-    const newCatway = new Catway({ catwayNumber, type, catwayState });
-    await newCatway.save();
-    res.status(201).json(newCatway);
+    const existingCatway = await catwayService.findCatwayByNumber(
+      req.body.catwayNumber
+    );
+    if (existingCatway) {
+      return res
+        .status(400)
+        .render("error", { message: "Le numéro du Catway existe déjà !" });
+    }
+
+    const newCatway = await catwayService.createCatway(req.body);
+
+    res.redirect("/dashboard?message=Catway créé avec succès !");
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).render("error", { message: error.message });
   }
 };
 
 exports.updateCatway = async (req, res) => {
   try {
-    const updatedCatway = await Catway.findByIdAndUpdate(req.params.id, req.body, { new: true, overwrite: true });
-    if (!updatedCatway) return res.status(404).json({ message: 'Catway non trouvé' });
-    res.json(updatedCatway);
+    const updatedCatway = await catwayService.updateCatway(
+      req.params.id,
+      req.body
+    );
+    if (!updatedCatway) {
+      return res.status(404).render("error", { message: "Catway non trouvé" });
+    }
+    res.redirect("/dashboard?message=Catway mis à jour avec succès !");
   } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-exports.partialUpdateCatway = async (req, res) => {
-  try {
-    const updatedCatway = await Catway.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
-    if (!updatedCatway) return res.status(404).json({ message: 'Catway non trouvé' });
-    res.json(updatedCatway);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).render("error", { message: error.message });
   }
 };
 
 exports.deleteCatway = async (req, res) => {
   try {
-    const deletedCatway = await Catway.findByIdAndDelete(req.params.id);
-    if (!deletedCatway) return res.status(404).json({ message: 'Catway non trouvé' });
-    res.json({ message: 'Catway supprimé avec succès' });
+    const deletedCatway = await catwayService.deleteCatway(req.params.id);
+    if (!deletedCatway) {
+      return res.status(404).render("error", { message: "Catway non trouvé" });
+    }
+    res.redirect("/dashboard?message=Catway supprimé avec succès !");
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).render("error", { message: error.message });
   }
 };
