@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 const connectDB = async () => {
@@ -27,7 +26,7 @@ const createFirstUser = async () => {
     }
   } catch (err) {
     console.error(
-      "❌ Erreur lors de la création de l'utilisateur 'professeur':",
+      "❌ Erreur lors de la création de l'utilisateur 'first':",
       err
     );
   }

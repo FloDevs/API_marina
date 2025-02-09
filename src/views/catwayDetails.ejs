@@ -3,9 +3,13 @@
 <h1>Détails du Catway</h1>
 
 <% if (catway) { %>
-<p>ID : <%= catway.id %></p>
-<p>Nom : <%= catway.name %></p>
-<p>Description : <%= catway.description %></p>
+<p>ID du catway: <%= catway.id %></p>
+<p>Numero du catway: <%= catway.catwayNumber %></p>
+<p>Description : <%= catway.catwayState %></p>
+<% if (catway.reservations && catway.reservations.length > 0) { %>
+    Numero de reservation = <%= catway.reservations %>
+<% } %>
+
 <% } else { %>
 <p>Aucun catway trouvé.</p>
 <% } %>
