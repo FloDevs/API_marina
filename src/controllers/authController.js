@@ -8,7 +8,7 @@ exports.register = async (req, res) => {
     const user = await authService.registerUser(name, email, password);
 
     res.redirect(
-      "/?message=Utilisateur enregistré avec succès ! Vous pouvez maintenant vous connecter."
+      "/dashboard?message=Utilisateur enregistré avec succès ! "
     );
   } catch (err) {
     console.error("Error during registration:", err.message);

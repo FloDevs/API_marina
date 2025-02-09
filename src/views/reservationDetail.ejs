@@ -3,8 +3,8 @@
 <h1>Détails de la Réservation</h1>
 
 <% if (reservation) { %>
-<p>ID : <%= reservation.id %></p>
-<p>Catway ID : <%= reservation.catwayId %></p>
+<p>ID de la reservation : <%= reservation.id %></p>
+<p>ID du catway: <%= reservation.catway %></p>
 <p>Nom du client = <%= reservation.clientName %> </p>
 <p>Nom du bateau = <%= reservation.boatName %> </p>
 <p>Date : <%= reservation.checkIn.toDateString() %> à <%= reservation.checkOut.toDateString()%> </p>

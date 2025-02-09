@@ -5,7 +5,7 @@
 
 
 <% if (message) { %>
-    <div class="alert alert-success">
+    <div>
         <%= message %>
     </div>
 <% } %>
@@ -95,6 +95,14 @@
   <label for="updateCatwayId">ID du catway :</label>
   <input type="text" id="updateCatwayId" data-id name="id" required>
   <br>
+  <label for="catwayNumber">Numéro du Catway :</label>
+  <input type="text" id="catwayNumber" name="catwayNumber" required>
+  <br>
+  <label for="catwayType">Type :</label>
+  <select id="catwayType" name="type" required>
+    <option value="long">Long</option>
+    <option value="short">Court</option>
+  </select>
   <label for="updateCatwayState">Nouvelle description :</label>
   <textarea id="updateCatwayState" name="catwayState" required></textarea>
   <br>
@@ -124,8 +132,8 @@
 <form data-form-update data-entity="reservations" data-method="POST">
   <h3>Créer une Réservation</h3>
 
-  <label for="id">ID du Catway :</label>
-  <input type="text" id="id" data-id required>
+  <label for="catwayId">ID du Catway :</label>
+  <input type="text" id="catwayId" name="catwayId" data-id required>
 
   <label for="clientName">Nom du Client :</label>
   <input type="text" id="clientName" name="clientName" required>

@@ -38,7 +38,7 @@ exports.getReservationById = async (req, res) => {
 
 exports.createReservation = async (req, res) => {
   try {
-    const { catwayId } = req.params;
+    const { catwayId } = req.body;
     await reservationService.createReservation(catwayId, req.body);
     res.redirect(`/dashboard?message=Réservation créée avec succès !`);
   } catch (error) {
