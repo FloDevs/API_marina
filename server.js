@@ -80,6 +80,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "Une erreur interne est survenue." });
 });
 
+
+
 // Lancement du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Serveur lancé sur le port ${PORT}`));
