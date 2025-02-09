@@ -30,15 +30,38 @@
 
 <section>
   <h2>Tutoriel</h2>
+
   <h3>Installation & Configuration</h3>
-  <code>
-    git clone https://github.com/ton-repo.git <br />
-    cd ton-projet <br />
-    npm install <br />
-    Authentification : <br />
-    Inscription : POST /auth/register <br />
-    Connexion : POST /auth/login
-  </code>
+  <pre><code>
+  # Cloner le projet
+  git clone https://github.com/FloDevs/API_marina
+  cd API_marina
+  
+  # Installer les dépendances
+  npm install
+  
+  # Configurer la base de données
+  # - Créer un fichier .env à la racine du projet avec 4 variables = 
+  MONGODB_URI=Votre_URL_de_serveur_MongoDB (local ou en ligne)
+  JWT_SECRET=Une_clé_secrète_robuste
+  PORT=Le_port_de_votre_application (ex: 3000)
+  SESSION_SECRET=Une_autre_clé_secrète_robuste
+  
+  
+  # Lancer le serveur
+  node server.js
+
+  # Lancer les test 
+  npm test 
+  </code></pre>
+  
+  <h3>Authentification</h3>
+  <p>Un premier utilisateur a déjà été créé dans la base de données :</p>
+  <ul>
+    <li><strong>Email :</strong> first@example.com</li>
+    <li><strong>Mot de passe :</strong> first123</li>
+  </ul>
+  
 
   <h2>Routes Disponibles</h2>
   <ul>
@@ -53,7 +76,7 @@
     <li>PUT /users/:id - Modifier un utilisateur</li>
     <li>DELETE /users/:id - Supprimer un utilisateur</li>
     <li>
-      GET /reservations/catways/:id/:reservationId - Détails d'une réservation
+      GET /reservations/:reservationId - Détails d'une réservation
     </li>
     <li>POST /reservations/:id - Créer une réservation pour un catway</li>
     <li>DELETE /reservations/:reservationId - Supprimer une réservation</li>
