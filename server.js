@@ -52,8 +52,7 @@ app.get("/dashboard", (req, res) => {
     return res.redirect("/");
   }
 
-  const message = req.session.message || null;
-  req.session.message = null;
+  const message = req.query.message || null;
   res.render("dashboard", { user: req.session.user, message }); // Passer message à la vue
 });
 
