@@ -5,8 +5,9 @@
 <% if (reservation) { %>
 <p>ID : <%= reservation.id %></p>
 <p>Catway ID : <%= reservation.catwayId %></p>
-<p>Utilisateur ID : <%= reservation.userId %></p>
-<p>Date : <%= reservation.date %></p>
+<p>Nom du client = <%= reservation.clientName %> </p>
+<p>Nom du bateau = <%= reservation.boatName %> </p>
+<p>Date : <%= reservation.checkIn.toDateString() %> à <%= reservation.checkOut.toDateString()%> </p>
 <% } else { %>
 <p>Aucune réservation trouvée.</p>
 <% } %>
